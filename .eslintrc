@@ -1,7 +1,4 @@
 {
   "extends": ["wesbos"],
   "parser": "babel-eslint"
-  // "rules": {
-  //   ""
-  // }
 }
