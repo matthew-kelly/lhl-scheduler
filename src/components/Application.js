@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import "components/Application.scss";
+import 'components/Application.scss';
 
 export default function Application(props) {
   return (
@@ -12,7 +12,7 @@ export default function Application(props) {
           alt="Interview Scheduler"
         />
         <hr className="sidebar__separator sidebar--centered" />
-        <nav className="sidebar__menu"></nav>
+        <nav className="sidebar__menu" />
         <img
           className="sidebar__lhl sidebar--centered"
           src="images/lhl.png"
