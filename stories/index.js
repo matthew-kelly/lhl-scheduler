@@ -5,12 +5,14 @@ import { action } from '@storybook/addon-actions';
 
 import '../src/index.scss';
 
-import DayListItem from '../src/components/DayListItem';
-import Button from '../src/components/Button';
-import DayList from '../src/components/DayList';
-import InterviewerListItem from '../src/components/InterviewerListItem';
-import InterviewerList from '../src/components/InterviewerList';
-import Appointment from '../src/components/Appointment';
+import Empty from 'components/Appointment/Empty';
+import DayListItem from 'components/DayListItem';
+import Button from 'components/Button';
+import DayList from 'components/DayList';
+import InterviewerListItem from 'components/InterviewerListItem';
+import InterviewerList from 'components/InterviewerList';
+import Appointment from 'components/Appointment';
+import Header from 'components/Appointment/Header';
 
 storiesOf('Button', module)
   .addParameters({
@@ -133,4 +135,6 @@ storiesOf('Appointment', module)
     backgrounds: [{ name: 'white', value: '#fff', default: true }],
   })
   .add('Appointment', () => <Appointment />)
-  .add('With Time', () => <Appointment time="12pm" />);
+  .add('With Time', () => <Appointment time="12pm" />)
+  .add('Header', () => <Header time="12pm" />)
+  .add('Empty', () => <Empty onAdd={action('onAdd')} />);
