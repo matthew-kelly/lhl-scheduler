@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { getAppointmentsForDay } from 'helpers/selectors';
 
 export function useApplicationData() {
   const [state, setState] = useState({
@@ -16,6 +17,7 @@ export function useApplicationData() {
       axios.get(`/api/interviewers`),
     ])
       .then((all) => {
+        console.log({ days: all[0].data, appointments: all[1].data });
         setState((prev) => ({
           ...prev,
           days: all[0].data,
@@ -25,6 +27,21 @@ export function useApplicationData() {
       })
       .catch((e) => console.error(e));
   }, []);
+
+  function updateSpots(appointments) {
+    return state.days.map((day) => {
+      const dayAppointments = day.appointments.map(
+        (appt) => appointments[appt]
+      );
+      const spots = dayAppointments.filter(
+        (appt) => appt.interview === null
+      ).length;
+      return {
+        ...day,
+        spots,
+      };
+    });
+  }
 
   const bookInterview = (id, interview) => {
     const appointment = {
@@ -43,6 +60,7 @@ export function useApplicationData() {
       setState((prev) => ({
         ...prev,
         appointments,
+        days: updateSpots(appointments),
       }));
     });
   };
@@ -63,6 +81,7 @@ export function useApplicationData() {
       setState((prev) => ({
         ...prev,
         appointments,
+        days: updateSpots(appointments),
       }));
     });
   };
