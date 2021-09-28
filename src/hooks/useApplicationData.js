@@ -70,6 +70,17 @@ export function useApplicationData() {
   });
 
   useEffect(() => {
+    const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+    socket.onopen = (event) => {
+      socket.send('ping');
+    };
+    socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.type === 'SET_INTERVIEW') {
+        dispatch(data);
+      }
+    };
+
     Promise.all([
       axios.get(`/api/days`),
       axios.get(`/api/appointments`),
