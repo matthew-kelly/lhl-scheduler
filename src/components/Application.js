@@ -32,14 +32,12 @@ export default function Application(props) {
       method: 'put',
       url: `/api/appointments/${id}`,
       data: { interview },
-    })
-      .then((res) => {
-        setState((prev) => ({
-          ...prev,
-          appointments,
-        }));
-      })
-      .catch((e) => console.error(e));
+    }).then((res) => {
+      setState((prev) => ({
+        ...prev,
+        appointments,
+      }));
+    });
   };
 
   const cancelInterview = (id) => {
@@ -54,14 +52,12 @@ export default function Application(props) {
     return axios({
       method: 'delete',
       url: `api/appointments/${id}`,
-    })
-      .then((res) => {
-        setState((prev) => ({
-          ...prev,
-          appointments,
-        }));
-      })
-      .catch((e) => console.error(e));
+    }).then((res) => {
+      setState((prev) => ({
+        ...prev,
+        appointments,
+      }));
+    });
   };
 
   const appointmentsForDay = getAppointmentsForDay(state, state.day);

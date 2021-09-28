@@ -1,14 +1,14 @@
 import React from 'react';
 
+import './styles.scss';
 import { useVisualMode } from 'hooks/useVisualMode';
 import Header from './Header';
 import Show from './Show';
 import Empty from './Empty';
 import Form from './Form';
 import Status from './Status';
-
-import './styles.scss';
 import Confirm from './Confirm';
+import Error from './Error';
 
 const EMPTY = 'EMPTY';
 const SHOW = 'SHOW';
@@ -16,6 +16,9 @@ const CREATE = 'CREATE';
 const CONFIRM = 'CONFIRM';
 const SAVING = 'SAVING';
 const DELETING = 'DELETING';
+const EDIT = 'EDIT';
+const ERROR_SAVE = 'ERROR_SAVE';
+const ERROR_DELETE = 'ERROR_DELETE';
 
 export default function Appointment(props) {
   const { id, time, interview, interviewers, bookInterview, cancelInterview } =
@@ -28,16 +31,20 @@ export default function Appointment(props) {
       interviewer,
     };
     transition(SAVING);
-    bookInterview(id, newInterview).then((res) => {
-      transition(SHOW);
-    });
+    bookInterview(id, newInterview)
+      .then((res) => {
+        transition(SHOW);
+      })
+      .catch((error) => transition(ERROR_SAVE, true));
   };
 
   const cancel = () => {
-    transition(DELETING);
-    cancelInterview(id).then((res) => {
-      transition(EMPTY);
-    });
+    transition(DELETING, true);
+    cancelInterview(id)
+      .then((res) => {
+        transition(EMPTY);
+      })
+      .catch((error) => transition(ERROR_DELETE, true));
   };
 
   return (
@@ -49,6 +56,7 @@ export default function Appointment(props) {
           student={interview.student}
           interviewer={interview.interviewer}
           onDelete={() => transition(CONFIRM)}
+          onEdit={() => transition(EDIT)}
         />
       )}
       {mode === CONFIRM && (
@@ -62,6 +70,21 @@ export default function Appointment(props) {
       {mode === DELETING && <Status message="Deleting..." />}
       {mode === CREATE && (
         <Form interviewers={interviewers} onSave={save} onCancel={back} />
+      )}
+      {mode === EDIT && (
+        <Form
+          interviewers={interviewers}
+          interviewer={interview.interviewer}
+          name={interview.student}
+          onSave={save}
+          onCancel={back}
+        />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error message="Unable to save the appointment" onClose={back} />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error message="Unable to cancel the appointment" onClose={back} />
       )}
     </article>
   );
