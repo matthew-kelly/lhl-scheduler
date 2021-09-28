@@ -5,6 +5,19 @@ const SET_DAY = 'SET_DAY';
 const SET_APPLICATION_DATA = 'SET_APPLICATION_DATA';
 const SET_INTERVIEW = 'SET_INTERVIEW';
 
+function updateSpots(days, appointments) {
+  return days.map((day) => {
+    const dayAppointments = day.appointments.map((appt) => appointments[appt]);
+    const spots = dayAppointments.filter(
+      (appt) => appt.interview === null
+    ).length;
+    return {
+      ...day,
+      spots,
+    };
+  });
+}
+
 export function useApplicationData() {
   function reducer(state, action) {
     switch (action.type) {
@@ -15,7 +28,6 @@ export function useApplicationData() {
         };
       }
       case SET_APPLICATION_DATA: {
-        console.log(action);
         return {
           ...state,
           days: action.days,
@@ -24,10 +36,22 @@ export function useApplicationData() {
         };
       }
       case SET_INTERVIEW: {
-        return {
+        const appointment = {
+          ...state.appointments[action.id],
+          interview: action.interview,
+        };
+        const appointments = {
+          ...state.appointments,
+          [action.id]: appointment,
+        };
+        const newState = {
           ...state,
-          appointments: action.appointments,
-          days: action.days,
+          appointments,
+        };
+        const days = updateSpots(newState.days, appointments);
+        return {
+          ...newState,
+          days,
         };
       }
       default: {
@@ -62,63 +86,30 @@ export function useApplicationData() {
       .catch((e) => console.error(e));
   }, []);
 
-  function updateSpots(appointments) {
-    return state.days.map((day) => {
-      const dayAppointments = day.appointments.map(
-        (appt) => appointments[appt]
-      );
-      const spots = dayAppointments.filter(
-        (appt) => appt.interview === null
-      ).length;
-      return {
-        ...day,
-        spots,
-      };
-    });
-  }
-
-  const bookInterview = (id, interview) => {
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview },
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment,
-    };
-    return axios({
+  const bookInterview = (id, interview) =>
+    axios({
       method: 'put',
       url: `/api/appointments/${id}`,
       data: { interview },
     }).then((res) => {
       dispatch({
         type: SET_INTERVIEW,
-        appointments,
-        days: updateSpots(appointments),
+        id,
+        interview,
       });
     });
-  };
 
-  const cancelInterview = (id) => {
-    const appointment = {
-      ...state.appointments[id],
-      interview: null,
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment,
-    };
-    return axios({
+  const cancelInterview = (id) =>
+    axios({
       method: 'delete',
       url: `api/appointments/${id}`,
     }).then((res) => {
       dispatch({
         type: SET_INTERVIEW,
-        appointments,
-        days: updateSpots(appointments),
+        id,
+        interview: null,
       });
     });
-  };
 
   const setDay = (day) => dispatch({ type: SET_DAY, day });
 
