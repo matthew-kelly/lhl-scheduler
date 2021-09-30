@@ -79,4 +79,16 @@ export default {
       });
     }
   }),
+  put: jest.fn((url) =>
+    Promise.resolve({
+      status: 204,
+      statusText: 'No Content',
+    })
+  ),
+  delete: jest.fn((url) =>
+    Promise.resolve({
+      status: 204,
+      statusText: 'No Content',
+    })
+  ),
 };
