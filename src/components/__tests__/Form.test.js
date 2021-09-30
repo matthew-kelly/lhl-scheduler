@@ -1,5 +1,11 @@
 import React from 'react';
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import {
+  render,
+  cleanup,
+  fireEvent,
+  prettyDOM,
+  getByAltText,
+} from '@testing-library/react';
 
 import Form from 'components/Appointment/Form';
 
@@ -29,10 +35,11 @@ describe('Form', () => {
   });
 
   it('renders with initial interviewer', () => {
-    const { getByTestId, getBy } = render(
+    const { getByTestId } = render(
       <Form interviewers={interviewers} interviewer={interviewers[0]} />
     );
-    expect(getByTestId('interviewer')).toHaveValue('Sylvia Palmer');
+    const interviewer = getByTestId('interviewer');
+    expect(getByAltText(interviewer, 'Sylvia Palmer')).toBeInTheDocument();
   });
 
   it('validates that the student name is not blank', () => {
