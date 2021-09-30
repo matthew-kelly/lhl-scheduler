@@ -98,11 +98,7 @@ export function useApplicationData() {
   }, []);
 
   const bookInterview = (id, interview) =>
-    axios({
-      method: 'put',
-      url: `/api/appointments/${id}`,
-      data: { interview },
-    }).then((res) => {
+    axios.put(`/api/appointments/${id}`, { interview }).then((res) => {
       dispatch({
         type: SET_INTERVIEW,
         id,
@@ -111,10 +107,7 @@ export function useApplicationData() {
     });
 
   const cancelInterview = (id) =>
-    axios({
-      method: 'delete',
-      url: `api/appointments/${id}`,
-    }).then((res) => {
+    axios.delete(`api/appointments/${id}`).then((res) => {
       dispatch({
         type: SET_INTERVIEW,
         id,
