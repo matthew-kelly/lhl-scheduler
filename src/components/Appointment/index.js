@@ -97,10 +97,10 @@ export default function Appointment(props) {
 }
 
 Appointment.propTypes = {
-  id: PropTypes.number.isRequired,
-  time: PropTypes.string.isRequired,
+  id: PropTypes.number,
+  time: PropTypes.string,
   interview: PropTypes.object,
-  interviewers: PropTypes.array.isRequired,
-  bookInterview: PropTypes.func.isRequired,
-  cancelInterview: PropTypes.func.isRequired,
+  interviewers: PropTypes.array,
+  bookInterview: PropTypes.func,
+  cancelInterview: PropTypes.func,
 };

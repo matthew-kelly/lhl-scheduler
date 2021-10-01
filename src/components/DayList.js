@@ -21,7 +21,7 @@ export default function DayList(props) {
 }
 
 DayList.propTypes = {
-  day: PropTypes.string.isRequired,
-  days: PropTypes.array.isRequired,
-  setDay: PropTypes.func.isRequired,
+  day: PropTypes.string,
+  days: PropTypes.array,
+  setDay: PropTypes.func,
 };

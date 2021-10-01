@@ -75,8 +75,8 @@ export default function Form(props) {
 
 Form.propTypes = {
   name: PropTypes.string,
-  interviewers: PropTypes.array.isRequired,
+  interviewers: PropTypes.array,
   interviewer: PropTypes.object,
-  onSave: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
+  onSave: PropTypes.func,
+  onCancel: PropTypes.func,
 };

@@ -12,5 +12,5 @@ export default function Header(props) {
 }
 
 Header.propTypes = {
-  time: PropTypes.string.isRequired,
+  time: PropTypes.string,
 };

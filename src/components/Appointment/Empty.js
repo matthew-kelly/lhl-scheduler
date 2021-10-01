@@ -11,5 +11,5 @@ export default function Empty(props) {
 }
 
 Empty.propTypes = {
-  onAdd: PropTypes.func.isRequired,
+  onAdd: PropTypes.func,
 };

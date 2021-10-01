@@ -34,8 +34,8 @@ export default function DayListItem(props) {
 }
 
 DayListItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  spots: PropTypes.number.isRequired,
+  name: PropTypes.string,
+  spots: PropTypes.number,
   selected: PropTypes.bool,
-  setDay: PropTypes.func.isRequired,
+  setDay: PropTypes.func,
 };
