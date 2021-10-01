@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import './styles.scss';
-import { useVisualMode } from 'hooks/useVisualMode';
+import { useVisualMode } from '../../hooks/useVisualMode';
 import Header from './Header';
 import Show from './Show';
 import Empty from './Empty';
@@ -94,3 +95,12 @@ export default function Appointment(props) {
     </article>
   );
 }
+
+Appointment.propTypes = {
+  id: PropTypes.number.isRequired,
+  time: PropTypes.string.isRequired,
+  interview: PropTypes.object,
+  interviewers: PropTypes.array.isRequired,
+  bookInterview: PropTypes.func.isRequired,
+  cancelInterview: PropTypes.func.isRequired,
+};

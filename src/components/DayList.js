@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import DayListItem from './DayListItem';
 
 export default function DayList(props) {
@@ -18,3 +19,9 @@ export default function DayList(props) {
     </ul>
   );
 }
+
+DayList.propTypes = {
+  day: PropTypes.string.isRequired,
+  days: PropTypes.array.isRequired,
+  setDay: PropTypes.func.isRequired,
+};

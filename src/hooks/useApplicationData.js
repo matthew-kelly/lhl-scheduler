@@ -4,7 +4,7 @@ import reducer, {
   SET_DAY,
   SET_APPLICATION_DATA,
   SET_INTERVIEW,
-} from 'reducers/application';
+} from '../reducers/application';
 
 export function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
@@ -16,7 +16,7 @@ export function useApplicationData() {
 
   useEffect(() => {
     const socket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
-    socket.onopen = (event) => {
+    socket.onopen = () => {
       socket.send('ping');
     };
     socket.onmessage = (event) => {

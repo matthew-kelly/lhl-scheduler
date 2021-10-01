@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Show(props) {
   const { student, interviewer, onEdit, onDelete } = props;
@@ -30,3 +31,10 @@ export default function Show(props) {
     </main>
   );
 }
+
+Show.propTypes = {
+  student: PropTypes.string.isRequired,
+  interviewer: PropTypes.object.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+};

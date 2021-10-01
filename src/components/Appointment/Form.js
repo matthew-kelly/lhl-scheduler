@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-import InterviewerList from 'components/InterviewerList';
-import Button from 'components/Button';
+import InterviewerList from '../InterviewerList';
+import Button from '../Button';
 
 export default function Form(props) {
   const {
@@ -71,3 +72,11 @@ export default function Form(props) {
     </main>
   );
 }
+
+Form.propTypes = {
+  name: PropTypes.string,
+  interviewers: PropTypes.array.isRequired,
+  interviewer: PropTypes.object,
+  onSave: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+};

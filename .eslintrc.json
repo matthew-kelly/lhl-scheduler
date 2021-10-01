@@ -3,5 +3,10 @@
   "parser": "babel-eslint",
   "globals": {
     "cy": true
+  },
+  "rules": {
+    "react/jsx-no-bind": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off"
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 import './DayListItem.scss';
 
@@ -10,14 +11,14 @@ export default function DayListItem(props) {
     'day-list__item--full': spots === 0,
   });
 
-  function formatSpots(spots) {
-    if (spots === 0) {
+  function formatSpots(num) {
+    if (num === 0) {
       return 'no spots remaining';
     }
-    if (spots === 1) {
+    if (num === 1) {
       return '1 spot remaining';
     }
-    return `${spots} spots remaining`;
+    return `${num} spots remaining`;
   }
 
   return (
@@ -31,3 +32,10 @@ export default function DayListItem(props) {
     </li>
   );
 }
+
+DayListItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  spots: PropTypes.number.isRequired,
+  selected: PropTypes.bool,
+  setDay: PropTypes.func.isRequired,
+};

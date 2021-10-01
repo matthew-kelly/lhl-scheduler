@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import Button from 'components/Button';
+import Button from '../Button';
 
 export default function Confirm(props) {
   const { message, onConfirm, onCancel } = props;
@@ -18,3 +19,9 @@ export default function Confirm(props) {
     </main>
   );
 }
+
+Confirm.propTypes = {
+  message: PropTypes.string.isRequired,
+  onConfirm: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+};

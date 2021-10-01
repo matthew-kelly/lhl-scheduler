@@ -1,17 +1,17 @@
 import React from 'react';
-import { useApplicationData } from 'hooks/useApplicationData';
+import { useApplicationData } from '../hooks/useApplicationData';
 import {
   getAppointmentsForDay,
   getInterviewersForDay,
   getInterview,
-} from 'helpers/selectors';
+} from '../helpers/selectors';
 
 import Appointment from './Appointment';
 import DayList from './DayList';
 
 import './Application.scss';
 
-export default function Application(props) {
+export default function Application() {
   const { state, setDay, bookInterview, cancelInterview } =
     useApplicationData();
 

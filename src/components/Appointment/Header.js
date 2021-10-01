@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Header(props) {
   const { time } = props;
@@ -9,3 +10,7 @@ export default function Header(props) {
     </header>
   );
 }
+
+Header.propTypes = {
+  time: PropTypes.string.isRequired,
+};
