@@ -1,5 +1,7 @@
 # Interview Scheduler
 
+[![CircleCI](https://circleci.com/gh/matthew-kelly/lhl-scheduler/tree/master.svg?style=svg)](https://circleci.com/gh/matthew-kelly/lhl-scheduler/tree/master)
+
 ## Setup
 
 Install dependencies with `npm install`.
